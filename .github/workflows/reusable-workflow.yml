@@ -12,6 +12,7 @@ on:
 jobs:
   reusable_job:
     runs-on: ubuntu-latest
+    environment: Staging
     steps:
       - name: Print staging environment variable
         run: echo "Staging environment variables is ${{ inputs.ENV_VARIABLE }}"
