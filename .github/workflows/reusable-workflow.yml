@@ -16,10 +16,14 @@ jobs:
         run: echo "Staging environment variables is ${{ vars.ENV_VARIABLE }}"
       
       - name: Print staging environment secret
-        run: echo "Staging environment secret is ${{ secrets.ENV_SECRET }} and is ${{ secrets.ENV_SECRET.length }} characters long"
+        env:
+          ENV_SECRET: ${{ secrets.ENV_SECRET }}
+        run: echo "Staging environment secret is ${{ secrets.ENV_SECRET }} and is ${#ENV_SECRET} characters long"
 
       - name: Print repository variable
         run: echo "Repository variable is ${{ vars.REPO_VARIABLE }}"
 
       - name: Print repository secret
-        run: echo "Repository secret is ${{ secrets.REPO_SECRET }} and is ${{ secrets.REPO_SECRET.length }} characters long"
+        env:
+          REPO_SECRET: ${{ secrets.REPO_SECRET}}
+        run: echo "Repository secret is ${{ secrets.REPO_SECRET }} and is ${#REPO_SECRET} characters long"
