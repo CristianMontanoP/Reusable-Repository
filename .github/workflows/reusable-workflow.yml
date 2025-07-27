@@ -1,21 +1,25 @@
 name: Reusable workflow
 on:
   workflow_call:
-    # inputs:
-    #   ENV_VARIABLE:
-    #     required: true
-    #     type: string
-    # secrets:
-    #   ENV_SECRET:
-    #     required: true
+    inputs:
+      ENVIRONMENT:
+        description: The environment to run the workflow in
+        required: true
+        type: string
 
 jobs:
   reusable_job:
+    environment: ${{ inputs.ENVIRONMENT }}
     runs-on: ubuntu-latest
-    environment: Staging
     steps:
       - name: Print staging environment variable
         run: echo "Staging environment variables is ${{ vars.ENV_VARIABLE }}"
       
       - name: Print staging environment secret
-        run: echo "Staging environment secret is ${{ secrets.ENV_SECRET }}"
+        run: echo "Staging environment secret is ${{ secrets.ENV_SECRET }} and is ${{ secrets.ENV_SECRET.length }} characters long"
+
+      - name: Print repository variable
+        run: echo "Repository variable is ${{ vars.REPO_VARIABLE }}"
+
+      - name: Print repository secret
+        run: echo "Repository secret is ${{ secrets.REPO_SECRET }} and is ${{ secrets.REPO_SECRET.length }} characters long"
